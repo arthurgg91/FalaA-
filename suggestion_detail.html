@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}FalaAí | Detalhes{% endblock %}
+
+{% block content %}
+<section class="detail-section">
+  <div class="section-heading">
+    <h1>{{ manifestacao['titulo'] }}</h1>
+    <span class="badge badge-{{ manifestacao['status'] | replace(' ', '-') }}">{{ manifestacao['status'] }}</span>
+  </div>
+
+  <article class="detail-card">
+    <div class="detail-meta">
+      <span><strong>Categoria:</strong> {{ manifestacao['categoria'] }}</span>
+      <span><strong>Morador:</strong> {{ manifestacao['nome_morador'] }}</span>
+      <span><strong>Bairro:</strong> {{ manifestacao['bairro'] }}</span>
+      <span><strong>CEP:</strong> {{ manifestacao['cep'] }}</span>
+    </div>
+
+    <p class="detail-description">{{ manifestacao['descricao'] }}</p>
+
+    <div class="item-actions detail-actions">
+      <a class="btn btn-secondary" href="{{ url_for('edit', id=manifestacao['id']) }}">Editar</a>
+      <form method="POST" action="{{ url_for('delete', id=manifestacao['id']) }}" class="inline-form" onsubmit="return confirm('Deseja realmente excluir esta manifestação?');">
+        <button class="btn btn-danger" type="submit">Excluir</button>
+      </form>
+      <a class="btn btn-link" href="{{ url_for('suggestions') }}">Voltar</a>
+    </div>
+  </article>
+</section>
+{% endblock %}

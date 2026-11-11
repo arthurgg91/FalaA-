@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}FalaAí{% endblock %}</title>
+    <meta name="description" content="Plataforma de manifestação comunitária para moradores." />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav-container">
+        <a href="{{ url_for('index') }}" class="brand" aria-label="Página inicial do FalaAí">
+          <span class="brand-mark">F</span>
+          FalaAí
+        </a>
+
+        <nav class="main-nav" aria-label="Menu principal">
+          <a href="{{ url_for('index') }}">Início</a>
+          <a href="{{ url_for('suggestions') }}">Manifestações</a>
+          <a href="{{ url_for('submit') }}">Cadastrar</a>
+          <a href="{{ url_for('sobre') }}">Sobre</a>
+          <a href="{{ url_for('consulta') }}">Consulta</a>
+        </nav>
+
+        <div class="font-controls" aria-label="Controle de acessibilidade">
+          <button type="button" class="font-btn" data-font="decrease" aria-label="Diminuir o tamanho da fonte">A-</button>
+          <button type="button" class="font-btn" data-font="increase" aria-label="Aumentar o tamanho da fonte">A+</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-container" aria-live="polite">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>FalaAí • Participação comunitária</p>
+        <p>Projeto Integrador Back-end - UC35</p>
+      </div>
+    </footer>
+  </body>
+</html>

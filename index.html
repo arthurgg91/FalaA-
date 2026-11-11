@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}FalaAí | Início{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Comunidade atuando em conjunto</p>
+    <h1>Seu bairro merece ser ouvido.</h1>
+    <p>
+      Registre problemas, sugestões e demandas do seu entorno para ajudar a cidade a responder com mais agilidade.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ url_for('submit') }}">Registrar manifestação</a>
+      <a class="btn btn-secondary" href="{{ url_for('suggestions') }}">Ver listagem</a>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <h2>Resumo rápido</h2>
+    {% set total_geral = 0 %}
+    {% for item in totais %}
+      {% set total_geral = total_geral + item['total'] %}
+    {% endfor %}
+    <div class="stat-grid">
+      <div class="stat-card">
+        <strong>{{ total_geral }}</strong>
+        <span>Total</span>
+      </div>
+      {% for item in totais %}
+        <div class="stat-card">
+          <strong>{{ item['total'] }}</strong>
+          <span>{{ item['status'] }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <h2>Últimas manifestações</h2>
+    <a href="{{ url_for('suggestions') }}" class="link-inline">Ver todas</a>
+  </div>
+
+  {% if manifestacoes %}
+    <div class="card-grid">
+      {% for item in manifestacoes %}
+        <article class="card">
+          <div class="card-header">
+            <span class="badge badge-{{ item['status'] | replace(' ', '-') }}">{{ item['status'] }}</span>
+            <span class="tag">{{ item['categoria'] }}</span>
+          </div>
+          <h3>{{ item['titulo'] }}</h3>
+          <p>{{ item['descricao'][:120] }}{% if item['descricao']|length > 120 %}...{% endif %}</p>
+          <div class="card-meta">
+            <span>{{ item['nome_morador'] }}</span>
+            <span>{{ item['bairro'] }}</span>
+          </div>
+          <a class="btn btn-link" href="{{ url_for('suggestion_detail', id=item['id']) }}">Detalhes</a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty-state">Ainda não há manifestações cadastradas.</p>
+  {% endif %}
+</section>
+{% endblock %}

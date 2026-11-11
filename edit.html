@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}FalaAí | Editar{% endblock %}
+
+{% block content %}
+<section class="form-section">
+  <h1>Editar manifestação</h1>
+  <form method="POST" class="form-card">
+    <fieldset>
+      <legend>Dados da manifestação</legend>
+
+      <div class="field-group">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" required value="{{ manifestacao['titulo'] }}" />
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria" required>
+            {% for categoria in categorias %}
+              <option value="{{ categoria }}" {% if categoria == manifestacao['categoria'] %}selected{% endif %}>{{ categoria }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="status">Status</label>
+          <select id="status" name="status" required>
+            {% for status in statuses %}
+              <option value="{{ status }}" {% if status == manifestacao['status'] %}selected{% endif %}>{{ status }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" rows="6" required>{{ manifestacao['descricao'] }}</textarea>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Atualizar</button>
+      <a class="btn btn-secondary" href="{{ url_for('suggestion_detail', id=manifestacao['id']) }}">Cancelar</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

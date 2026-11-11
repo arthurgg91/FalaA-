@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}FalaAí | Cadastro{% endblock %}
+
+{% block content %}
+<section class="form-section">
+  <h1>Registrar manifestação</h1>
+  <form method="POST" class="form-card">
+    <fieldset>
+      <legend>Dados do morador</legend>
+
+      <div class="field-group">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Ex: Maria da Silva" />
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="bairro">Bairro</label>
+          <input type="text" id="bairro" name="bairro" required placeholder="Ex: Centro" />
+        </div>
+
+        <div class="field-group">
+          <label for="cep">CEP</label>
+          <input type="text" id="cep" name="cep" required placeholder="Ex: 12345-678" />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Manifestação</legend>
+
+      <div class="field-group">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" required placeholder="Ex: Poste sem luz" />
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione</option>
+            {% for categoria in categorias %}
+              <option value="{{ categoria }}">{{ categoria }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="status">Status</label>
+          <select id="status" name="status" required>
+            {% for status in statuses %}
+              <option value="{{ status }}">{{ status }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" rows="6" required placeholder="Descreva o problema encontrado..."></textarea>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Salvar manifestação</button>
+      <a class="btn btn-secondary" href="{{ url_for('suggestions') }}">Cancelar</a>
+    </div>
+  </form>
+</section>
+{% endblock %}
