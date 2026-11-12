@@ -1,6 +1,6 @@
-# FalaAí - UC35
+# Voz Senac - UC35
 
-O FalaAí é uma plataforma de participação comunitária para registrar reclamações, sugestões e problemas encontrados em bairros, como iluminação pública, lixo, buracos nas ruas, segurança e infraestrutura.
+O Voz Senac é um projeto acadêmico independente de participação da comunidade estudantil. Ele permite compartilhar ideias e necessidades relacionadas ao ambiente de aprendizagem, como salas, laboratórios, biblioteca, acessibilidade, tecnologia e atividades estudantis. Não é um canal oficial do Senac.
 
 ## Tecnologias
 
@@ -14,7 +14,7 @@ O FalaAí é uma plataforma de participação comunitária para registrar reclam
 
 ## Estrutura do projeto
 
-FalaAi_UC35/
+VozSenac_UC35/
 - app.py
 - database.py
 - banco.db
@@ -52,14 +52,14 @@ FalaAi_UC35/
 
 - Página inicial
 - Página sobre o projeto
-- Cadastro de manifestações
-- Listagem de manifestações
+- Cadastro de contribuições estudantis
+- Listagem de ideias e relatos
 - Visualização individual
-- Edição de manifestações
-- Exclusão de manifestações
-- Identificação do morador
+- Edição de contribuições
+- Exclusão de contribuições
+- Identificação por nome ou apelido, curso/área e unidade/turma
 - Categorias e status
-- API JSON em /api/manifestacoes
+- API JSON em `/api/manifestacoes`
 
 ## Banco de dados e persistência
 

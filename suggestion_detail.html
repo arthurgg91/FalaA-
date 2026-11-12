@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}FalaAí | Detalhes{% endblock %}
+{% block title %}Voz Senac | Detalhes{% endblock %}
 
 {% block content %}
 <section class="detail-section">
@@ -11,17 +11,17 @@
 
   <article class="detail-card">
     <div class="detail-meta">
-      <span><strong>Categoria:</strong> {{ manifestacao['categoria'] }}</span>
-      <span><strong>Morador:</strong> {{ manifestacao['nome_morador'] }}</span>
-      <span><strong>Bairro:</strong> {{ manifestacao['bairro'] }}</span>
-      <span><strong>CEP:</strong> {{ manifestacao['cep'] }}</span>
+      <span><strong>Tema:</strong> {{ manifestacao['categoria'] }}</span>
+      <span><strong>Estudante:</strong> {{ manifestacao['nome_estudante'] }}</span>
+      <span><strong>Curso/área:</strong> {{ manifestacao['curso'] }}</span>
+      <span><strong>Unidade/turma:</strong> {{ manifestacao['unidade'] }}</span>
     </div>
 
     <p class="detail-description">{{ manifestacao['descricao'] }}</p>
 
     <div class="item-actions detail-actions">
       <a class="btn btn-secondary" href="{{ url_for('edit', id=manifestacao['id']) }}">Editar</a>
-      <form method="POST" action="{{ url_for('delete', id=manifestacao['id']) }}" class="inline-form" onsubmit="return confirm('Deseja realmente excluir esta manifestação?');">
+      <form method="POST" action="{{ url_for('delete', id=manifestacao['id']) }}" class="inline-form" onsubmit="return confirm('Deseja realmente excluir esta contribuição?');">
         <button class="btn btn-danger" type="submit">Excluir</button>
       </form>
       <a class="btn btn-link" href="{{ url_for('suggestions') }}">Voltar</a>

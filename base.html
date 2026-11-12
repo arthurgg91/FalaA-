@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}FalaAí{% endblock %}</title>
-    <meta name="description" content="Plataforma de manifestação comunitária para moradores." />
+    <title>{% block title %}Voz Senac{% endblock %}</title>
+    <meta name="description" content="Espaço de escuta e participação da comunidade estudantil Senac." />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
   </head>
   <body>
     <header class="topbar">
       <div class="container nav-container">
-        <a href="{{ url_for('index') }}" class="brand" aria-label="Página inicial do FalaAí">
-          <span class="brand-mark">F</span>
-          FalaAí
+        <a href="{{ url_for('index') }}" class="brand" aria-label="Página inicial do Voz Senac">
+          <span class="brand-mark">V</span>
+          Voz Senac
         </a>
 
         <nav class="main-nav" aria-label="Menu principal">
           <a href="{{ url_for('index') }}">Início</a>
-          <a href="{{ url_for('suggestions') }}">Manifestações</a>
-          <a href="{{ url_for('submit') }}">Cadastrar</a>
+          <a href="{{ url_for('suggestions') }}">Ideias e relatos</a>
+          <a href="{{ url_for('submit') }}">Enviar contribuição</a>
           <a href="{{ url_for('sobre') }}">Sobre</a>
-          <a href="{{ url_for('consulta') }}">Consulta</a>
+          <a href="{{ url_for('consulta') }}">Buscar</a>
         </nav>
 
         <div class="font-controls" aria-label="Controle de acessibilidade">
@@ -49,8 +49,8 @@
 
     <footer class="footer">
       <div class="container footer-content">
-        <p>FalaAí • Participação comunitária</p>
-        <p>Projeto Integrador Back-end - UC35</p>
+        <p>Voz Senac • Comunidade estudantil</p>
+        <p>Projeto acadêmico independente — não é um canal oficial do Senac.</p>
       </div>
     </footer>
   </body>

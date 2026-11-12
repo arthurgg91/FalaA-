@@ -1,38 +1,38 @@
 {% extends 'base.html' %}
 
-{% block title %}FalaAí | Cadastro{% endblock %}
+{% block title %}Voz Senac | Enviar contribuição{% endblock %}
 
 {% block content %}
 <section class="form-section">
-  <h1>Registrar manifestação</h1>
+  <h1>Compartilhe uma ideia ou necessidade</h1>
   <form method="POST" class="form-card">
     <fieldset>
-      <legend>Dados do morador</legend>
+      <legend>Sobre você</legend>
 
       <div class="field-group">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" required placeholder="Ex: Maria da Silva" />
+        <label for="nome">Nome ou identificação</label>
+        <input type="text" id="nome" name="nome" required placeholder="Como podemos identificar você?" />
       </div>
 
       <div class="field-row">
         <div class="field-group">
-          <label for="bairro">Bairro</label>
-          <input type="text" id="bairro" name="bairro" required placeholder="Ex: Centro" />
+          <label for="curso">Curso ou área</label>
+          <input type="text" id="curso" name="curso" required placeholder="Ex.: Técnico em Administração" />
         </div>
 
         <div class="field-group">
-          <label for="cep">CEP</label>
-          <input type="text" id="cep" name="cep" required placeholder="Ex: 12345-678" />
+          <label for="unidade">Unidade, turma ou turno</label>
+          <input type="text" id="unidade" name="unidade" required placeholder="Ajude a contextualizar sua contribuição" />
         </div>
       </div>
     </fieldset>
 
     <fieldset>
-      <legend>Manifestação</legend>
+      <legend>Sua contribuição</legend>
 
       <div class="field-group">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" name="titulo" required placeholder="Ex: Poste sem luz" />
+        <label for="titulo">Assunto</label>
+        <input type="text" id="titulo" name="titulo" required placeholder="Ex.: Mais tomadas na sala de estudos" />
       </div>
 
       <div class="field-row">
@@ -57,13 +57,13 @@
       </div>
 
       <div class="field-group">
-        <label for="descricao">Descrição</label>
-        <textarea id="descricao" name="descricao" rows="6" required placeholder="Descreva o problema encontrado..."></textarea>
+        <label for="descricao">Conte o que aconteceu ou o que pode melhorar</label>
+        <textarea id="descricao" name="descricao" rows="6" required placeholder="Dê detalhes que ajudem a comunidade a entender sua ideia ou necessidade..."></textarea>
       </div>
     </fieldset>
 
     <div class="form-actions">
-      <button class="btn btn-primary" type="submit">Salvar manifestação</button>
+      <button class="btn btn-primary" type="submit">Publicar contribuição</button>
       <a class="btn btn-secondary" href="{{ url_for('suggestions') }}">Cancelar</a>
     </div>
   </form>

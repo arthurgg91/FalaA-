@@ -22,13 +22,16 @@ app = Flask(__name__, template_folder=str(BASE_DIR / "templates"), static_folder
 app.config["SECRET_KEY"] = "falaai-uc35-projeto-integrador"
 
 CATEGORIAS = [
-    "Iluminação pública",
-    "Lixo e coleta",
-    "Buraco na rua",
-    "Segurança",
-    "Infraestrutura",
-    "Água e saneamento",
-    "Transito e vias",
+    "Salas e infraestrutura",
+    "Laboratórios e equipamentos",
+    "Biblioteca e espaços de estudo",
+    "Internet e tecnologia",
+    "Acessibilidade",
+    "Limpeza e conforto",
+    "Convivência e segurança",
+    "Eventos e atividades",
+    "Sugestão acadêmica",
+    "Outro",
 ]
 
 STATUSES = ["pendente", "em análise", "resolvido"]
@@ -67,27 +70,27 @@ def suggestions():
 
 @app.route("/manifestacao/<int:id>")
 def suggestion_detail(id):
-    """Detalhe de uma manifestação específica."""
+    """Detalhe de uma contribuição específica."""
     manifestacao = buscar_manifestacao_por_id(id)
     if manifestacao is None:
-        flash("Manifestação não encontrada.", "error")
+        flash("Contribuição não encontrada.", "error")
         return redirect(url_for("suggestions"))
     return render_template("suggestion_detail.html", manifestacao=manifestacao)
 
 
 @app.route("/submit", methods=["GET", "POST"])
 def submit():
-    """Cadastro de morador e manifestação."""
+    """Cadastro de estudante e manifestação."""
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
-        bairro = request.form.get("bairro", "").strip()
-        cep = request.form.get("cep", "").strip()
+        curso = request.form.get("curso", "").strip()
+        unidade = request.form.get("unidade", "").strip()
         titulo = request.form.get("titulo", "").strip()
         categoria = request.form.get("categoria", "").strip()
         descricao = request.form.get("descricao", "").strip()
         status = request.form.get("status", "pendente").strip().lower()
 
-        if not all([nome, bairro, cep, titulo, categoria, descricao]):
+        if not all([nome, curso, unidade, titulo, categoria, descricao]):
             flash("Preencha todos os campos obrigatórios.", "error")
             return render_template("submit.html", categorias=CATEGORIAS, statuses=STATUSES)
 
@@ -99,9 +102,9 @@ def submit():
             flash("Status inválido.", "error")
             return render_template("submit.html", categorias=CATEGORIAS, statuses=STATUSES)
 
-        morador_id = criar_morador(nome, bairro, cep)
+        morador_id = criar_morador(nome, curso, unidade)
         criar_manifestacao(titulo, categoria, descricao, status, morador_id)
-        flash("Manifestação cadastrada com sucesso!", "success")
+        flash("Contribuição publicada com sucesso!", "success")
         return redirect(url_for("suggestions"))
 
     return render_template("submit.html", categorias=CATEGORIAS, statuses=STATUSES)
@@ -109,10 +112,10 @@ def submit():
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
-    """Edição de uma manifestação."""
+    """Edição de uma contribuição."""
     manifestacao = buscar_manifestacao_por_id(id)
     if manifestacao is None:
-        flash("Manifestação não encontrada para edição.", "error")
+        flash("Contribuição não encontrada para edição.", "error")
         return redirect(url_for("suggestions"))
 
     if request.method == "POST":
@@ -122,7 +125,7 @@ def edit(id):
         status = request.form.get("status", "pendente").strip().lower()
 
         if not all([titulo, categoria, descricao]):
-            flash("Todos os campos da manifestação devem ser preenchidos.", "error")
+            flash("Todos os campos da contribuição devem ser preenchidos.", "error")
             return render_template(
                 "edit.html",
                 manifestacao=manifestacao,
@@ -149,7 +152,7 @@ def edit(id):
             )
 
         atualizar_manifestacao(id, titulo, categoria, descricao, status)
-        flash("Manifestação atualizada com sucesso!", "success")
+        flash("Contribuição atualizada com sucesso!", "success")
         return redirect(url_for("suggestion_detail", id=id))
 
     return render_template("edit.html", manifestacao=manifestacao, categorias=CATEGORIAS, statuses=STATUSES)
@@ -157,14 +160,14 @@ def edit(id):
 
 @app.route("/delete/<int:id>", methods=["POST"])
 def delete(id):
-    """Exclusão de manifestação via POST para evitar GET insegura."""
+    """Exclusão de contribuição via POST para evitar GET insegura."""
     manifestacao = buscar_manifestacao_por_id(id)
     if manifestacao is None:
-        flash("Não foi possível encontrar a manifestação para excluir.", "error")
+        flash("Não foi possível encontrar a contribuição para excluir.", "error")
         return redirect(url_for("suggestions"))
 
     excluir_manifestacao(id)
-    flash("Manifestação removida com sucesso.", "success")
+    flash("Contribuição removida com sucesso.", "success")
     return redirect(url_for("suggestions"))
 
 
@@ -198,10 +201,10 @@ def api_manifestacoes():
                 "categoria": item["categoria"],
                 "descricao": item["descricao"],
                 "status": item["status"],
-                "morador": {
-                    "nome": item["nome_morador"],
-                    "bairro": item["bairro"],
-                    "cep": item["cep"],
+                "estudante": {
+                    "nome": item["nome_estudante"],
+                    "curso": item["curso"],
+                    "unidade": item["unidade"],
                 },
             }
         )

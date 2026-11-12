@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}FalaAí | Manifestações{% endblock %}
+{% block title %}Voz Senac | Ideias e relatos{% endblock %}
 
 {% block content %}
 <section class="section-block">
   <div class="section-heading">
-    <h1>Manifestações cadastradas</h1>
-    <a class="btn btn-primary" href="{{ url_for('submit') }}">Nova manifestação</a>
+    <h1>Ideias e relatos da comunidade</h1>
+    <a class="btn btn-primary" href="{{ url_for('submit') }}">Nova contribuição</a>
   </div>
 
   <form class="filter-form" method="GET" action="{{ url_for('consulta') }}">
     <div class="field-row filter-row">
       <div class="field-group">
-        <label for="categoria">Categoria</label>
+        <label for="categoria">Tema</label>
         <select id="categoria" name="categoria">
           <option value="">Todas</option>
           {% for categoria in categorias %}
@@ -52,15 +52,15 @@
           <p>{{ item['descricao'][:180] }}{% if item['descricao']|length > 180 %}...{% endif %}</p>
 
           <div class="manifest-meta">
-            <span>Morador: {{ item['nome_morador'] }}</span>
-            <span>Bairro: {{ item['bairro'] }}</span>
-            <span>CEP: {{ item['cep'] }}</span>
+            <span>Estudante: {{ item['nome_estudante'] }}</span>
+            <span>Curso/área: {{ item['curso'] }}</span>
+            <span>Unidade/turma: {{ item['unidade'] }}</span>
           </div>
 
           <div class="item-actions">
             <a class="btn btn-link" href="{{ url_for('suggestion_detail', id=item['id']) }}">Detalhes</a>
             <a class="btn btn-secondary" href="{{ url_for('edit', id=item['id']) }}">Editar</a>
-            <form method="POST" action="{{ url_for('delete', id=item['id']) }}" class="inline-form" onsubmit="return confirm('Tem certeza que deseja excluir esta manifestação?');">
+            <form method="POST" action="{{ url_for('delete', id=item['id']) }}" class="inline-form" onsubmit="return confirm('Tem certeza que deseja excluir esta contribuição?');">
               <button class="btn btn-danger" type="submit">Excluir</button>
             </form>
           </div>
@@ -68,7 +68,7 @@
       {% endfor %}
     </div>
   {% else %}
-    <p class="empty-state">Nenhuma manifestação encontrada com os filtros selecionados.</p>
+    <p class="empty-state">Nenhuma contribuição encontrada com os filtros selecionados.</p>
   {% endif %}
 </section>
 {% endblock %}

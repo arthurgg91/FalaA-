@@ -45,13 +45,13 @@ def init_db():
         conn.close()
 
 
-def criar_morador(nome, bairro, cep):
-    """Cadastra um morador e retorna o ID gerado."""
+def criar_morador(nome, curso, unidade):
+    """Cadastra um estudante e retorna o ID gerado."""
     conn = get_connection()
     try:
         cursor = conn.execute(
             "INSERT INTO moradores (nome, bairro, cep) VALUES (?, ?, ?)",
-            (nome, bairro, cep),
+            (nome, curso, unidade),
         )
         conn.commit()
         return cursor.lastrowid
@@ -83,7 +83,8 @@ def listar_manifestacoes():
         return conn.execute(
             """
             SELECT m.id, m.titulo, m.categoria, m.descricao, m.status,
-                   mor.nome AS nome_morador, mor.bairro, mor.cep
+                   mor.nome AS nome_estudante,
+                   mor.bairro AS curso, mor.cep AS unidade
             FROM manifestacoes m
             INNER JOIN moradores mor ON m.morador_id = mor.id
             ORDER BY m.id DESC
@@ -100,7 +101,8 @@ def buscar_manifestacao_por_id(manifestacao_id):
         return conn.execute(
             """
             SELECT m.id, m.titulo, m.categoria, m.descricao, m.status,
-                   m.morador_id, mor.nome AS nome_morador, mor.bairro, mor.cep
+                   m.morador_id, mor.nome AS nome_estudante,
+                   mor.bairro AS curso, mor.cep AS unidade
             FROM manifestacoes m
             INNER JOIN moradores mor ON m.morador_id = mor.id
             WHERE m.id = ?
@@ -144,7 +146,8 @@ def buscar_manifestacoes_filtradas(categoria=None, status=None):
     try:
         query = """
             SELECT m.id, m.titulo, m.categoria, m.descricao, m.status,
-                   mor.nome AS nome_morador, mor.bairro, mor.cep
+                   mor.nome AS nome_estudante,
+                   mor.bairro AS curso, mor.cep AS unidade
             FROM manifestacoes m
             INNER JOIN moradores mor ON m.morador_id = mor.id
         """
@@ -187,7 +190,7 @@ def obter_morador_por_id(morador_id):
     conn = get_connection()
     try:
         return conn.execute(
-            "SELECT id, nome, bairro, cep FROM moradores WHERE id = ?",
+            "SELECT id, nome, bairro AS curso, cep AS unidade FROM moradores WHERE id = ?",
             (morador_id,),
         ).fetchone()
     finally:

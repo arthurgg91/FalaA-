@@ -1,8 +1,8 @@
 :root {
-  --dark-green: #12352a;
-  --green: #2a6f4d;
-  --light-green: #dfeee4;
-  --soft-green: #a9d5b3;
+  --navy: #073b6f;
+  --blue: #07599f;
+  --light-blue: #e8f2fb;
+  --orange: #f58220;
   --white: #ffffff;
   --gray-light: #f3f5f4;
   --gray: #5a665f;
@@ -10,7 +10,7 @@
   --danger: #b33a3a;
   --warning: #c58a2b;
   --success: #2f7d50;
-  --shadow: 0 10px 28px rgba(18, 53, 42, 0.12);
+  --shadow: 0 10px 28px rgba(7, 59, 111, 0.12);
 }
 
 * {
@@ -55,7 +55,8 @@ a:focus-visible {
 }
 
 .topbar {
-  background: var(--dark-green);
+  background: var(--navy);
+  border-bottom: 4px solid var(--orange);
   color: var(--white);
   position: sticky;
   top: 0;
@@ -87,7 +88,7 @@ a:focus-visible {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--green);
+  background: var(--orange);
   color: var(--white);
 }
 
@@ -104,7 +105,7 @@ a:focus-visible {
 
 .main-nav a:hover,
 .main-nav a:focus-visible {
-  color: var(--soft-green);
+  color: var(--orange);
 }
 
 .font-controls {
@@ -126,7 +127,8 @@ a:focus-visible {
 }
 
 .hero {
-  background: linear-gradient(135deg, var(--light-green), #edf6ef);
+  background: linear-gradient(135deg, var(--light-blue), #ffffff);
+  border-top: 4px solid var(--orange);
   border: 1px solid var(--border);
   border-radius: 22px;
   padding: 2.2rem;
@@ -139,14 +141,14 @@ a:focus-visible {
 .hero-text h1 {
   margin: 0.2rem 0 0.8rem;
   font-size: clamp(2rem, 4vw, 3.2rem);
-  color: var(--dark-green);
+  color: var(--navy);
 }
 
 .eyebrow {
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  color: var(--green);
+  color: var(--blue);
   font-size: 0.75rem;
   font-weight: 700;
 }
@@ -185,14 +187,15 @@ a:focus-visible {
 }
 
 .btn-primary {
-  background: var(--green);
+  background: var(--blue);
   color: var(--white);
-  box-shadow: 0 10px 18px rgba(42, 111, 77, 0.2);
+  box-shadow: 0 10px 18px rgba(7, 89, 159, 0.2);
 }
 
 .btn-secondary {
-  background: var(--light-green);
-  color: var(--dark-green);
+  background: var(--light-blue);
+  color: var(--navy);
+  border: 1px solid #c8dff2;
 }
 
 .btn-danger {
@@ -202,7 +205,7 @@ a:focus-visible {
 
 .btn-link {
   background: transparent;
-  color: var(--green);
+  color: var(--blue);
   padding-left: 0;
 }
 
@@ -225,12 +228,12 @@ a:focus-visible {
 .section-heading h2,
 .content-section h1,
 .form-section h1 {
-  color: var(--dark-green);
+  color: var(--navy);
   margin: 0;
 }
 
 .link-inline {
-  color: var(--green);
+  color: var(--blue);
   font-weight: 700;
 }
 
@@ -287,14 +290,14 @@ a:focus-visible {
 }
 
 .tag {
-  background: var(--light-green);
-  color: var(--dark-green);
+  background: var(--light-blue);
+  color: var(--navy);
 }
 
 .card h3,
 .manifest-item h2 {
   margin: 0.8rem 0 0.6rem;
-  color: var(--dark-green);
+  color: var(--navy);
 }
 
 .card-meta,
@@ -340,7 +343,7 @@ a:focus-visible {
 
 label {
   font-weight: 700;
-  color: var(--dark-green);
+  color: var(--navy);
 }
 
 input,
@@ -366,7 +369,7 @@ fieldset {
 legend {
   padding: 0 0.5rem;
   font-weight: 700;
-  color: var(--dark-green);
+  color: var(--navy);
 }
 
 .stat-grid {
@@ -387,7 +390,7 @@ legend {
 
 .stat-card strong {
   font-size: 1.5rem;
-  color: var(--dark-green);
+  color: var(--navy);
 }
 
 .list-table {
@@ -437,7 +440,7 @@ legend {
 }
 
 .footer {
-  background: var(--dark-green);
+  background: var(--navy);
   color: var(--white);
   margin-top: 2rem;
 }
